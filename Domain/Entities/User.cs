@@ -11,9 +11,9 @@ namespace Domain.Entities
         protected string Name { get; set; }
         protected string Email { get; set; }
         protected string Password { get; set; }
-        protected int Phone {  get; set; }
+        protected string Phone {  get; set; }
 
-        protected User(string name, string email, string password, int phone)
+        protected User(string name, string email, string password, string phone)
         {
             Name = name;
             Email = email;
