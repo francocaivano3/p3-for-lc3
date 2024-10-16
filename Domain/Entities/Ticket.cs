@@ -8,5 +8,12 @@ namespace Domain.Entities
 {
     public class Ticket
     {
+        public int Id { get; set; }
+        public string Payment {  get; set; }
+
+        public Ticket(int id, string payment)
+        {
+               
+        }
     }
 }

@@ -13,7 +13,8 @@ namespace Domain.Entities
         
         public Client(string name, string email, string password, int phone, int age) : base(name, email, password, phone)
         {
-            
-        }}
+            Age = age;
+        }
     }
-}
+    }
+
