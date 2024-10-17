@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Client : User
+    public class Client : User 
     {
         public int Age {  get; set; }
         public List<Ticket> MyTickets { get; set; } = new List<Ticket>();
