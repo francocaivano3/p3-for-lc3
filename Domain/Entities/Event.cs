@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,23 +10,30 @@ namespace Domain.Entities
 {
     public class Event
     {
-        private string _name {  get; set; }
-        private string _address { get; set; }
-        private string _city { get; set; }
-        private DateTime _date { get; set; }
-        private List<Ticket> _tickets { get; set; }
-        private string _category { get; set; }
-        private float _price { get; set; }
-
+        public string Name {  get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public DateTime Date { get; set; }
+        public string Category { get; set; }
+        public float Price { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public List<Ticket> Tickets { get; set; }
         public Event(string name, string address, string city, DateTime date, List<Ticket> tickets, string category, float price)
         {
-            _name = name;
-            _address = address;
-            _city = city;
-            _date = date;
-            _tickets = tickets;
-            _category = category;
-            _price = price;
+            Name = name;
+            Address = address;
+            City = city;
+            Date = date;
+            Tickets = tickets;
+            Category = category;
+            Price = price;
         }
+
+        //public Event() // constructor vacio que necesita ef
+        //{
+        //    Tickets = new List<Ticket>();
+        //}
     }
 }

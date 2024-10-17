@@ -12,13 +12,14 @@ namespace Domain.Entities
         protected string Email { get; set; }
         protected string Password { get; set; }
         protected string Phone {  get; set; }
-
-        protected User(string name, string email, string password, string phone)
+        public string Role {  get; set; }
+        protected User(string name, string email, string password, string phone, string role)
         {
             Name = name;
             Email = email;
             Password = password;
             Phone = phone;
+            Role = role;
         }
     }
 }

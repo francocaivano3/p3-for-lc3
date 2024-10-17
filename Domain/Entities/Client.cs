@@ -11,7 +11,7 @@ namespace Domain.Entities
         public int Age {  get; set; }
         public List<Ticket> MyTickets { get; set; } = new List<Ticket>();
         
-        public Client(string name, string email, string password, int phone, int age) : base(name, email, password, phone)
+        public Client(string name, string email, string password, string phone, int age, string role) : base(name, email, password, phone, role)
         {
             Age = age;
         }
