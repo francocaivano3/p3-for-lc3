@@ -11,15 +11,19 @@ namespace Domain.Entities
         public int Id { get; set; }
         public int EventId { get; set; } // id del evento al que está asociado el ticket
         public Event Event { get; set; }
-        public int Amount { get; set; }
-        public string PaymentMethod { get; set; }
+        public float Amount { get; set; }
+        public string? PaymentMethod { get; set; } 
+        public bool State {  get; set; }
 
-        public Ticket(int id, int amount, string paymentMethod, int eventId)
+
+
+        public Ticket(int id, float amount, int eventId, bool state, string? paymentMethod = null)
         {
             Id = id;
             Amount = amount; 
             PaymentMethod = paymentMethod;
             EventId = eventId;
+            State = state;
         }
     }
 }
