@@ -8,11 +8,7 @@ namespace Domain.Entities
 {
 
 
-<<<<<<< HEAD
     public class EventOrganizer
-=======
-    internal class EventOrganizer
->>>>>>> main
     {
         public List<Event> MyEvents { get; set; } = new List<Event>();
         public float Rating { get; set; }
