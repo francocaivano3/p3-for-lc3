@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure
+namespace Infrastructure.Data.Repositories
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     {
@@ -17,7 +17,7 @@ namespace Infrastructure
             _context = context;
         }
 
-        public List<T> Get() 
+        public List<T> Get()
         {
             return _context.Set<T>().ToList();
         }
@@ -27,10 +27,10 @@ namespace Infrastructure
             return _context.Set<T>().Find(id);
         }
 
-        public void Create(T entity) 
+        public void Create(T entity)
         {
-           _context.Set<T>().Add(entity);
-           _context.SaveChanges();
+            _context.Set<T>().Add(entity);
+            _context.SaveChanges();
         }
 
         public void Delete(T entity)
@@ -42,7 +42,7 @@ namespace Infrastructure
         public void Update(T entity)
         {
             _context.Set<T>().Update(entity);
-            _context.SaveChanges(); 
+            _context.SaveChanges();
         }
     }
 }
