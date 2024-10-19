@@ -41,10 +41,5 @@ namespace Domain.Entities
             Tickets = new List<Ticket>();
         }
 
-        //public class Ticket
-        //{
-        //    public int Id { get; set; }
-        //    public bool Available { get; set; }
-        //}
     }
 }
