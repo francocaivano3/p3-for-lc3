@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Domain.Entities
 {
 
-
     public class EventOrganizer
     {
         public List<Event> MyEvents { get; set; } = new List<Event>();

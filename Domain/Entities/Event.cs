@@ -20,20 +20,31 @@ namespace Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public List<Ticket> Tickets { get; set; }
-        public Event(string name, string address, string city, DateTime date, List<Ticket> tickets, string category, float price)
+        public Event(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price)
         {
             Name = name;
             Address = address;
             City = city;
             Date = date;
-            Tickets = tickets;
+            Tickets = new List<Ticket>();
             Category = category;
             Price = price;
+
+            for (int i = 1; i <= numberOfTickets; i++)
+            {
+                Tickets.Add(new Ticket { Id = i, State = true });
+            }
         }
 
-        //public Event() // constructor vacio que necesita ef
+        public Event() // constructor vacio que necesita ef
+        {
+            Tickets = new List<Ticket>();
+        }
+
+        //public class Ticket
         //{
-        //    Tickets = new List<Ticket>();
+        //    public int Id { get; set; }
+        //    public bool Available { get; set; }
         //}
     }
 }
