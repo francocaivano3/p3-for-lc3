@@ -13,6 +13,7 @@ namespace Domain.Entities
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
+
         protected string Name { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
@@ -26,7 +27,9 @@ namespace Domain.Entities
 
         [Required]
         public string Role {  get; set; }
-        protected User(string name, string email, string password, string phone, string role)
+        
+        public User() { }
+        public User(string name, string email, string password, string phone, string role)
         {
             Name = name;
             Email = email;
