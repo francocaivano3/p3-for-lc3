@@ -1,6 +1,7 @@
 ﻿
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Infrastructure
 {
@@ -9,6 +10,7 @@ namespace Infrastructure
         public DbSet<Event> Events { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<EventOrganizer> EventsOrganizers { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         { }
@@ -30,6 +32,15 @@ namespace Infrastructure
                 .WithMany(e => e.Tickets)  
                 .HasForeignKey(t => t.EventId) 
                 .OnDelete(DeleteBehavior.Cascade);  
+
+            modelBuilder.Entity<EventOrganizer>()
+                .HasKey(o => o.Id);
+
+            modelBuilder.Entity<Event>()
+                .HasOne(e => e.EventOrganizer)
+                .WithMany(o => o.MyEvents)
+                .HasForeignKey(e => e.EventOrganizerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

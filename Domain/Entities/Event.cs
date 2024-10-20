@@ -10,17 +10,24 @@ namespace Domain.Entities
 {
     public class Event
     {
-        public string Name {  get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public DateTime Date { get; set; }
-        public string Category { get; set; }
-        public float Price { get; set; }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        public string? Name {  get; set; }
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public DateTime Date { get; set; }
+        public string? Category { get; set; }
+        public float Price { get; set; }
+
+
         public List<Ticket> Tickets { get; set; }
-        public Event(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price)
+        
+        public int EventOrganizerId { get; set; }
+        public EventOrganizer? EventOrganizer { get; set; }
+
+        public Event(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price, int eventOrganizerId)
         {
             Name = name;
             Address = address;
@@ -29,6 +36,7 @@ namespace Domain.Entities
             Tickets = new List<Ticket>();
             Category = category;
             Price = price;
+            EventOrganizerId = eventOrganizerId;
 
             for (int i = 1; i <= numberOfTickets; i++)
             {
@@ -41,10 +49,5 @@ namespace Domain.Entities
             Tickets = new List<Ticket>();
         }
 
-        //public class Ticket
-        //{
-        //    public int Id { get; set; }
-        //    public bool Available { get; set; }
-        //}
     }
 }

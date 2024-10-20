@@ -1,6 +1,10 @@
-using Application;
+using Application.Interfaces;
+using Domain.Interfaces;
 using Infrastructure;
+using Infrastructure.Data.Repositories;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,9 +14,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationContext>(juancito => juancito.UseSqlite("Data Source=ecommerceDb"));
+var connection = new SqliteConnection("Data Source = DB-Ejemplo.db");
+connection.Open();
 
+using (var command = connection.CreateCommand())
+{
+    command.CommandText = "PRAGMA journal_mode = DELETE;";
+    command.ExecuteNonQuery();
+}
 
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(connection, b => b.MigrationsAssembly("Infrastructure")));
+
+builder.Services.AddScoped<IEventRepository, EventRepository>(); 
+builder.Services.AddScoped<IEventService, EventService>();
 
 var app = builder.Build();
 
