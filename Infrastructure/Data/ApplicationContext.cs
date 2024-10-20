@@ -1,7 +1,6 @@
 ﻿
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Infrastructure
 {
@@ -33,8 +32,8 @@ namespace Infrastructure
                 .HasForeignKey(t => t.EventId) 
                 .OnDelete(DeleteBehavior.Cascade);  
 
-            modelBuilder.Entity<EventOrganizer>()
-                .HasKey(o => o.Id);
+            //modelBuilder.Entity<EventOrganizer>()
+            //    .HasKey(o => o.Id);
 
             modelBuilder.Entity<Event>()
                 .HasOne(e => e.EventOrganizer)

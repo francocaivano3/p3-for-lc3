@@ -8,17 +8,15 @@ namespace Domain.Entities
 {
 
 
-    public class EventOrganizer
+    public class EventOrganizer : User
     {
-        public int Id { get; set; }
         public List<Event> MyEvents { get; set; } = new List<Event>();
-        //public float Rating { get; set; }
-
-        //public EventOrganizer(float rating) 
-        //{
-        //    Rating = rating;
-        //}
-
+   
         public EventOrganizer() { }
+        public EventOrganizer(string name, string email, string password, string phone, string role) : base(name, email, password, phone, role)
+        {
+
+        }
+        
     }
 }

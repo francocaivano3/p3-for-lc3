@@ -11,8 +11,8 @@ namespace Application.Interfaces
     {
         void CreateEvent(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price, EventOrganizer eventOrganizer);
         Event GetEventById(int eventId);
-        IEnumerable<Event> GetAllEvents();
-        IEnumerable<EventOrganizer> GetEventsByOrganizerId(int organizerId);
+        List<Event> GetAllEvents();
+        List<Event> GetEventsByOrganizerId(int organizerId);
         void UpdateEvent(Event eventToUpdate);
         void DeleteEvent(int eventId);
     }

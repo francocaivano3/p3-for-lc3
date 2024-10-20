@@ -9,7 +9,7 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    internal class EventService : IEventService
+    public class EventService : IEventService
     {
         private readonly IEventRepository _eventRepository;
 
@@ -28,14 +28,14 @@ namespace Application.Services
             return _eventRepository.GetById(eventId);
         }
 
-        public IEnumerable<Event> GetAllEvents() 
+        public List<Event> GetAllEvents() 
         { 
-            return _eventRepository.GetAll();
+            return _eventRepository.GetAll().ToList();
         }
 
-        public IEnumerable<Event> GetEventsByOrganizerId(int organizerId)
+        public List<Event> GetEventsByOrganizerId(int organizerId)
         {
-            return _eventRepository.GetEventsByOrganizerId(organizerId);
+            return _eventRepository.GetEventsByOrganizerId(organizerId).ToList();
         }
 
         public void UpdateEvent(Event eventToUpdate)
