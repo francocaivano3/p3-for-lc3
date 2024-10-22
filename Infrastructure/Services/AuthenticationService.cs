@@ -44,7 +44,7 @@ namespace Infrastructure.Services
         }*/
           public string Autenticar(AuthenticationRequest authenticationRequest)
           {
-            return "a";
+            return authenticationRequest.UserName;
            
            /*   //Paso 1: Validamos las credenciales
               var user = ValidateUser(authenticationRequest); //Lo primero que hacemos es llamar a una función que valide los parámetros que enviamos.
