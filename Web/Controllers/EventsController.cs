@@ -32,19 +32,19 @@ namespace Web.Controllers
         }
 
         [HttpPost("organizer/{organizerId}/events")]
-        public IActionResult CreateEvent(int organizerId, [FromBody] EventsDto createEventDto)
+        public IActionResult CreateEvent(int organizerId, [FromQuery]EventsDto createEventDto)
         {
             if (createEventDto == null)
             {
-                return BadRequest("Invalid event data.");
+                return BadRequest("a");
             }
 
             // Buscar el organizador por su ID
-            var eventOrganizer = _context.EventsOrganizers.Find(organizerId);
-            if (eventOrganizer == null)
-            {
-                return NotFound("Organizer not found.");
-            }
+            //var eventOrganizer = _context.EventsOrganizers.Find(organizerId);
+            //if (eventOrganizer == null)
+            //{
+            //    return NotFound("Organizer not found.");
+           // }
 
             // Llamar al servicio para crear el evento
             _eventService.CreateEvent(
@@ -52,10 +52,9 @@ namespace Web.Controllers
                 createEventDto.Address,
                 createEventDto.City,
                 createEventDto.Date,
-                createEventDto.NumberOfTickets,
                 createEventDto.Category,
                 createEventDto.Price,
-                eventOrganizer
+                createEventDto.EventOrganizer
             );
 
             return Ok("Event created successfully.");

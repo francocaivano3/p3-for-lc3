@@ -13,13 +13,16 @@ namespace Domain.Entities
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
+        [Required]
 
         protected string Name { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
+        [Required]
         protected string Email { get; set; }
 
         [Column(TypeName = "nvarchar(64)")]
+        [Required]
         protected string Password { get; set; }
 
         [Column(TypeName = "nvarchar(11)")]

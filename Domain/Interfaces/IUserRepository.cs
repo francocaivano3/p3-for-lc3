@@ -7,8 +7,8 @@ using Domain.Entities;
 
 namespace Domain.Interfaces
 {
-    internal interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
-
+        User? GetUserByUserName(string userName);
     }
 }

@@ -9,8 +9,6 @@ namespace Application.Interfaces
 {
     public interface IClientService
     {
-        void Register();
-        string Login();
         List<Event> GetAll();
         List<Ticket> Tickets();
     }

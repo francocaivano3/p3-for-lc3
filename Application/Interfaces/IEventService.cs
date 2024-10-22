@@ -9,7 +9,7 @@ namespace Application.Interfaces
 {
     public interface IEventService
     {
-        void CreateEvent(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price, EventOrganizer eventOrganizer);
+        void CreateEvent(string name, string address, string city, DateTime date, string category, float price, EventOrganizer eventOrganizer);
         Event GetEventById(int eventId);
         List<Event> GetAllEvents();
         List<Event> GetEventsByOrganizerId(int organizerId);
