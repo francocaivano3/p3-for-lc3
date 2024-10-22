@@ -1,6 +1,9 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
+<<<<<<< HEAD
 using Domain.Interfaces;
+=======
+>>>>>>> e05bf1e512497b1cf92af63a84aa7bfc0628d802
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +14,7 @@ namespace Application.Services
 {
     public class ClientService : IClientService
     {
+<<<<<<< HEAD
         private readonly IClientRepository _clientRepository;
         private readonly IEventRepository _eventRepository;
         public ClientService(IClientRepository clientRepository, IEventRepository eventRepository)
@@ -59,5 +63,12 @@ namespace Application.Services
         {
             return _clientRepository.GetClientById(clientId);
         }
+=======
+        public void Register() { }
+        public string Login() { return "hoa"; }
+        public List<Event> GetAll() { var a = new List<Event>();
+                return a ; }
+        public List<Ticket> Tickets() { return new List<Ticket>(); }
+>>>>>>> e05bf1e512497b1cf92af63a84aa7bfc0628d802
     }
 }
