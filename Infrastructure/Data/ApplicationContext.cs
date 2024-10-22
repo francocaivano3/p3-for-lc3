@@ -32,6 +32,12 @@ namespace Infrastructure
                 .HasForeignKey(t => t.EventId) 
                 .OnDelete(DeleteBehavior.Cascade);  
 
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.Client)
+                .WithMany(c => c.MyTickets)
+                .HasForeignKey(t => t.ClientId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             //modelBuilder.Entity<EventOrganizer>()
             //    .HasKey(o => o.Id);
 

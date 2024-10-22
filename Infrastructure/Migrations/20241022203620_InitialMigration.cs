@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class SecondMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,6 +35,7 @@ namespace Infrastructure.Migrations
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    NumberOfTickets = table.Column<int>(type: "INTEGER", nullable: false),
                     Category = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<float>(type: "REAL", nullable: false),
                     EventOrganizerId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -57,10 +58,10 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     EventId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: true),
                     Amount = table.Column<float>(type: "REAL", nullable: false),
                     PaymentMethod = table.Column<string>(type: "TEXT", nullable: true),
-                    State = table.Column<bool>(type: "INTEGER", nullable: false),
-                    ClientId = table.Column<int>(type: "INTEGER", nullable: true)
+                    State = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,7 +76,8 @@ namespace Infrastructure.Migrations
                         name: "FK_Tickets_Users_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(

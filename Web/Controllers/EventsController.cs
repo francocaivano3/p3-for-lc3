@@ -6,6 +6,8 @@ using Application.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data.Repositories;
 using Infrastructure;
+
+
 namespace Web.Controllers
 {
     public class EventsController : Controller
@@ -32,21 +34,19 @@ namespace Web.Controllers
         }
 
         [HttpPost("organizer/{organizerId}/events")]
-        public IActionResult CreateEvent(int organizerId, [FromBody] EventsDto createEventDto)
+        public IActionResult CreateEvent(int organizerId, [FromQuery] EventsDto createEventDto)
         {
             if (createEventDto == null)
             {
                 return BadRequest("Invalid event data.");
             }
 
-            // Buscar el organizador por su ID
             var eventOrganizer = _context.EventsOrganizers.Find(organizerId);
             if (eventOrganizer == null)
             {
                 return NotFound("Organizer not found.");
             }
 
-            // Llamar al servicio para crear el evento
             _eventService.CreateEvent(
                 createEventDto.Name,
                 createEventDto.Address,
@@ -55,7 +55,7 @@ namespace Web.Controllers
                 createEventDto.NumberOfTickets,
                 createEventDto.Category,
                 createEventDto.Price,
-                eventOrganizer
+                organizerId
             );
 
             return Ok("Event created successfully.");

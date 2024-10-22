@@ -28,6 +28,8 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(c
 
 builder.Services.AddScoped<IEventRepository, EventRepository>(); 
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IClientService, ClientService>();
 
 var app = builder.Build();
 

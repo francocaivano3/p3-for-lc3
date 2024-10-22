@@ -28,7 +28,7 @@ namespace Domain.Entities
         public int EventOrganizerId { get; set; }
         public EventOrganizer? EventOrganizer { get; set; }
 
-        public Event(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price, EventOrganizer eventOrganizer)
+        public Event(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price, int eventOrganizerId)
         {
             Name = name;
             Address = address;
@@ -38,7 +38,7 @@ namespace Domain.Entities
             Tickets = new List<Ticket>();
             Category = category;
             Price = price;
-            EventOrganizer = eventOrganizer;
+            EventOrganizerId = eventOrganizerId;
 
             for (int i = 1; i <= numberOfTickets; i++)
             {

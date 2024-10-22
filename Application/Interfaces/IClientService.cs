@@ -9,9 +9,8 @@ namespace Application.Interfaces
 {
     public interface IClientService
     {
-        void Register();
-        string Login();
-        List<Event> GetAll();
-        List<Ticket> Tickets();
+        List<Ticket> GetAllMyTickets(int clientId);
+        bool BuyTicket(int clientId, int eventId);
+        Client GetClientById(int clientId);
     }
 }

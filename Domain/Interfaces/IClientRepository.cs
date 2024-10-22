@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
+
 namespace Domain.Interfaces
 {
-    internal interface IClientRepository
+    public interface IClientRepository
     {
-        Task<List<Ticket>> GetClientTickets(int clientId);
-        Task<Event> GetById();
+        void BuyTicket(Ticket ticket);
+        List<Ticket> GetAllMyTickets(int clientId);
+        Client GetClientById(int id);
+        void UpdateClient(Client client);
     }
 }
