@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241020181821_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20241020192434_FourMigration")]
+    partial class FourMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("NumberOfTickets")
+                        .HasColumnType("INTEGER");
 
                     b.Property<float>("Price")
                         .HasColumnType("REAL");

@@ -41,6 +41,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("NumberOfTickets")
+                        .HasColumnType("INTEGER");
+
                     b.Property<float>("Price")
                         .HasColumnType("REAL");
 

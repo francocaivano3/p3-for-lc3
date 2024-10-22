@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class SecondMigration : Migration
+    public partial class FourMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,6 +35,7 @@ namespace Infrastructure.Migrations
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    NumberOfTickets = table.Column<int>(type: "INTEGER", nullable: false),
                     Category = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<float>(type: "REAL", nullable: false),
                     EventOrganizerId = table.Column<int>(type: "INTEGER", nullable: false)

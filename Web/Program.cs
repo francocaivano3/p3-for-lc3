@@ -1,6 +1,7 @@
 using Application.Interfaces;
 using Application.Services;
 using Domain.Interfaces;
+using Infrastructure.Services;
 using Infrastructure;
 using Infrastructure.Data.Repositories;
 using Microsoft.Data.Sqlite;
@@ -28,6 +29,8 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(c
 
 builder.Services.AddScoped<IEventRepository, EventRepository>(); 
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 var app = builder.Build();
 

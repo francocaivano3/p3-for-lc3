@@ -18,7 +18,6 @@ namespace Domain.Entities
         public string? Address { get; set; }
         public string? City { get; set; }
         public DateTime Date { get; set; }
-        public int NumberOfTickets { get; set; }
         public string? Category { get; set; }
         public float Price { get; set; }
 
@@ -28,19 +27,18 @@ namespace Domain.Entities
         public int EventOrganizerId { get; set; }
         public EventOrganizer? EventOrganizer { get; set; }
 
-        public Event(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price, EventOrganizer eventOrganizer)
+        public Event(string name, string address, string city, DateTime date, string category, float price, EventOrganizer eventOrganizer)
         {
             Name = name;
             Address = address;
             City = city;
             Date = date;
-            NumberOfTickets = numberOfTickets;
             Tickets = new List<Ticket>();
             Category = category;
             Price = price;
             EventOrganizer = eventOrganizer;
 
-            for (int i = 1; i <= numberOfTickets; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 Tickets.Add(new Ticket (i, Price, this.Id, true, null));
             }
