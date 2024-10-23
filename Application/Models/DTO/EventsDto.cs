@@ -13,8 +13,9 @@ namespace Application.Models.DTO
         public string? Address { get; set; }
         public string? City { get; set; }
         public DateTime Date { get; set; }
+        public int NumberOfTickets { get; set; }
         public string? Category { get; set; }
         public float Price { get; set; }
-        //public EventOrganizer? EventOrganizer { get; set; }
+        public int EventOrganizerId { get; set; }
     }
 }

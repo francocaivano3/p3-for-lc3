@@ -34,44 +34,34 @@ namespace Web.Controllers
         }
 
         [HttpPost("organizer/{organizerId}/events")]
-<<<<<<< HEAD
-        public IActionResult CreateEvent(int organizerId, [FromQuery] EventsDto createEventDto)
-=======
+
         public IActionResult CreateEvent(int organizerId, [FromQuery]EventsDto createEventDto)
->>>>>>> e05bf1e512497b1cf92af63a84aa7bfc0628d802
+
         {
             if (createEventDto == null)
             {
                 return BadRequest("a");
             }
 
-<<<<<<< HEAD
-            var eventOrganizer = _context.EventsOrganizers.Find(organizerId);
-            if (eventOrganizer == null)
-            {
-                return NotFound("Organizer not found.");
-            }
-=======
+
+
             // Buscar el organizador por su ID
             //var eventOrganizer = _context.EventsOrganizers.Find(organizerId);
             //if (eventOrganizer == null)
             //{
             //    return NotFound("Organizer not found.");
            // }
->>>>>>> e05bf1e512497b1cf92af63a84aa7bfc0628d802
+
 
             _eventService.CreateEvent(
                 createEventDto.Name,
                 createEventDto.Address,
                 createEventDto.City,
                 createEventDto.Date,
+                createEventDto.NumberOfTickets,
                 createEventDto.Category,
                 createEventDto.Price,
-<<<<<<< HEAD
-                organizerId
-=======
-                createEventDto.EventOrganizer
->>>>>>> e05bf1e512497b1cf92af63a84aa7bfc0628d802
+                createEventDto.EventOrganizerId
             );
 
             return Ok("Event created successfully.");

@@ -29,13 +29,11 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(c
 
 builder.Services.AddScoped<IEventRepository, EventRepository>(); 
 builder.Services.AddScoped<IEventService, EventService>();
-<<<<<<< HEAD
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
-=======
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
->>>>>>> e05bf1e512497b1cf92af63a84aa7bfc0628d802
+
 
 var app = builder.Build();
 

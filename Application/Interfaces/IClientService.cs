@@ -9,7 +9,8 @@ namespace Application.Interfaces
 {
     public interface IClientService
     {
-
+        List<Ticket> GetAllMyTickets(int clientId);
+        bool BuyTicket(int clientId, int eventId);
         List<Event> GetAll();
         List<Ticket> Tickets();
 

@@ -18,9 +18,9 @@ namespace Application.Services
             _eventRepository = eventRepository;
         }
 
-        public void CreateEvent(string name, string address, string city, DateTime date, string category, float price, EventOrganizer eventOrganizer)
+        public void CreateEvent(string name, string address, string city, DateTime date, int numberOfTickets ,string category, float price, int eventOrganizerId)
         {
-            var newEvent = new Event(name, address, city, date, category, price, eventOrganizer);
+            var newEvent = new Event(name, address, city, date, numberOfTickets,category, price, eventOrganizerId);
             _eventRepository.Add(newEvent);
         }
 
