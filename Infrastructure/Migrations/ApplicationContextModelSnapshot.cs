@@ -141,15 +141,18 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Ticket", b =>
                 {
-                    b.HasOne("Domain.Entities.Client", null)
+                    b.HasOne("Domain.Entities.Client", "Client")
                         .WithMany("MyTickets")
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Domain.Entities.Event", "Event")
                         .WithMany("Tickets")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
 
                     b.Navigation("Event");
                 });

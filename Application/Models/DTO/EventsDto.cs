@@ -15,6 +15,6 @@ namespace Application.Models.DTO
         public DateTime Date { get; set; }
         public string? Category { get; set; }
         public float Price { get; set; }
-        public EventOrganizer? EventOrganizer { get; set; }
+        //public EventOrganizer? EventOrganizer { get; set; }
     }
 }

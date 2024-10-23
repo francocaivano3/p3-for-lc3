@@ -23,6 +23,7 @@ namespace Application.Services
             var newEvent = new Event(name, address, city, date, category, price, eventOrganizer);
             _eventRepository.Add(newEvent);
         }
+
         public Event GetEventById(int eventId)
         {
             return _eventRepository.GetById(eventId);

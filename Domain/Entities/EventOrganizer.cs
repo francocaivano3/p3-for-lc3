@@ -13,7 +13,7 @@ namespace Domain.Entities
         public List<Event> MyEvents { get; set; } = new List<Event>();
    
         public EventOrganizer() { }
-        public EventOrganizer(string name, string email, string password, string phone, string role) : base(name, email, password, phone, role)
+        public EventOrganizer(string name, string email, string password, string phone, string role = "Event Organizer") : base(name, email, password, phone, role)
         {
 
         }
