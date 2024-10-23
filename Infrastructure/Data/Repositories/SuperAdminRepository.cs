@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Repositories
 {
-    public class SuperAdminRepository : ISuperAdminRepository
+    public class SuperAdminRepository 
     {
         private readonly ApplicationContext _context;
 

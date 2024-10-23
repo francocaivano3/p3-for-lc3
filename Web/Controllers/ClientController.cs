@@ -27,7 +27,7 @@ namespace Web.Controllers
         {
            var result = _clientService.BuyTicket(clientId, eventId);
 
-            if (result)
+            if (result != null) //arreglo temporal
             {
                 return Ok("Ticket purchased succesfully");
             }
