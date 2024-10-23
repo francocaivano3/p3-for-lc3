@@ -18,18 +18,12 @@ namespace Application.Services
             _eventRepository = eventRepository;
         }
 
-<<<<<<< HEAD
-        public void CreateEvent(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price, int eventOrganizerId)
-        {
-            var newEvent = new Event(name, address, city, date, numberOfTickets, category, price, eventOrganizerId);
-=======
         public void CreateEvent(string name, string address, string city, DateTime date, string category, float price, EventOrganizer eventOrganizer)
         {
             var newEvent = new Event(name, address, city, date, category, price, eventOrganizer);
->>>>>>> e05bf1e512497b1cf92af63a84aa7bfc0628d802
             _eventRepository.Add(newEvent);
-
         }
+
         public Event GetEventById(int eventId)
         {
             return _eventRepository.GetById(eventId);
