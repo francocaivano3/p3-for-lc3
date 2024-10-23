@@ -33,14 +33,14 @@ namespace Domain.Entities
             City = city;
             Date = date;
             NumberOfTickets = numberOfTickets;
+            Tickets = new List<Ticket>();
             Category = category;
             Price = price;
             EventOrganizerId = eventOrganizerId;
-            
 
             for (int i = 1; i <= numberOfTickets; i++)
             {
-               Tickets.Add(new Ticket (i, Price, this.Id, true, null));
+               Tickets.Add(new Ticket (i, price, this.Id, true, null));
             }
         }
 

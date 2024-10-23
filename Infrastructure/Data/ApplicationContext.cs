@@ -47,6 +47,49 @@ namespace Infrastructure
                 .HasForeignKey(e => e.EventOrganizerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
+            modelBuilder.Entity<SuperAdmin>().HasData(
+                new SuperAdmin
+                {
+                    Id = 1,
+                    Name = "francoc3",
+                    Email = "francocaivano2002@gmail.com",
+                    Password = "Contraseña",
+                    Phone = "3415526384",
+                    Role = "Super Admin"
+                }
+            );
+
+            modelBuilder.Entity<EventOrganizer>().HasData(
+                new EventOrganizer
+                {
+                    Id = 2,
+                    Name = "francob3",
+                    Email = "francoberlochi@gmail.com",
+                    Password = "Contraseña1",
+                    Phone = "3415522312",
+                    Role = "Event Organizer",
+                    MyEvents = new List<Event>()
+                }
+            );
+
+            modelBuilder.Entity<Client>().HasData(
+                new Client
+                {
+                    Id = 3,
+                    Name = "ulisesdb1",
+                    Email = "ulisesdebonis@gmail.com",
+                    Password = "Contraseña3",
+                    Phone = "3415522313",
+                    Role = "Client",
+                    Age = 20,
+                    MyTickets = new List<Ticket>()
+                }
+            );
+
+
+
+
             base.OnModelCreating(modelBuilder);
         }
     }

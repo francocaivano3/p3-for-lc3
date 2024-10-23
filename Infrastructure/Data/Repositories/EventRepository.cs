@@ -25,12 +25,12 @@ namespace Infrastructure.Data.Repositories
             if(eventToAdd != null)
             {
                 _context.Events.Add(eventToAdd);
-                var eventOrganizer = _context.EventsOrganizers.Find(eventToAdd.EventOrganizer.Id);
+                var eventOrganizer = _context.EventsOrganizers.Find(eventToAdd.EventOrganizerId);
                 if(eventOrganizer != null)
                 {
                     eventOrganizer.MyEvents.Add(eventToAdd);
                 }
-            }
+            } 
 
             _context.SaveChanges();
         }

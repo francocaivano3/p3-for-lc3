@@ -19,14 +19,16 @@ namespace Domain.Entities
 
 
 
-        public Ticket(int id, float amount, int eventId, bool state, string? paymentMethod = null)
+        public Ticket(int id, float amount, int eventId, bool state, string? paymentMethod)
         {
             Id = id;
             Amount = amount; 
-            PaymentMethod = paymentMethod;
             EventId = eventId;
-            ClientId = null;
             State = state;
+            PaymentMethod = null;
+            ClientId = null;
         }
+
+        
     }
 }

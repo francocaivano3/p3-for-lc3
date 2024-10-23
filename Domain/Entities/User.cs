@@ -15,18 +15,18 @@ namespace Domain.Entities
         [Column(TypeName = "nvarchar(100)")]
         [Required]
 
-        protected string Name { get; set; }
+        public string Name { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         [Required]
-        protected string Email { get; set; }
+        public string Email { get; set; }
 
         [Column(TypeName = "nvarchar(64)")]
         [Required]
-        protected string Password { get; set; }
+        public string Password { get; set; }
 
         [Column(TypeName = "nvarchar(11)")]
-        protected string Phone {  get; set; }
+        public string Phone {  get; set; }
 
         [Required]
         public string Role {  get; set; }

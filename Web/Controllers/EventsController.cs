@@ -28,7 +28,7 @@ namespace Web.Controllers
             var events = _eventService.GetEventsByOrganizerId(organizerId);
             if (events == null || !events.Any())
             {
-                return NotFound();
+                return NotFound("No events for this organizer");
             }
             return Ok(events);
         }
@@ -40,17 +40,14 @@ namespace Web.Controllers
         {
             if (createEventDto == null)
             {
-                return BadRequest("a");
+                return BadRequest("Invalid event data");
             }
 
-
-
-            // Buscar el organizador por su ID
-            //var eventOrganizer = _context.EventsOrganizers.Find(organizerId);
-            //if (eventOrganizer == null)
-            //{
-            //    return NotFound("Organizer not found.");
-           // }
+            var eventOrganizer = _context.EventsOrganizers.Find(organizerId);
+            if (eventOrganizer == null)
+            {
+                return NotFound("Organizer not found.");
+            }
 
 
             _eventService.CreateEvent(
