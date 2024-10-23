@@ -6,6 +6,7 @@ using Application.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data.Repositories;
 using Infrastructure;
+using Application.Services;
 
 
 namespace Web.Controllers
@@ -49,6 +50,16 @@ namespace Web.Controllers
 
             return Ok(tickets);
         }
-        
+
+        [HttpGet("{clientId}/client")]
+        public IActionResult GetClientById(int id) 
+        {
+            var client = _clientService.GetClientById(id);
+            if (client == null)
+            {
+                return NotFound("No client found");
+            }
+            return Ok(client);
+        }
     }
 }

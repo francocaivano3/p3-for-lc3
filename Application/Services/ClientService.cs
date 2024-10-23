@@ -13,6 +13,13 @@ namespace Application.Services
     {
         private readonly IClientRepository _clientRepository;
         private readonly IEventRepository _eventRepository;
+
+        public ClientService (IClientRepository clientRepository, IEventRepository eventRepository)
+        {
+            _clientRepository = clientRepository;
+            _eventRepository = eventRepository;
+        }
+
         public void Register() 
         {
             // Lógica para el registro
@@ -58,6 +65,11 @@ namespace Application.Services
         { 
             var a = new List<Event>();
             return a; // Devuelve una lista de eventos
+        }
+
+        public Client GetClientById(int clientId) 
+        {
+            return _clientRepository.GetClientById(clientId);
         }
 
         public List<Ticket> GetAllMyTickets(int clientId) { return _clientRepository.GetAllMyTickets(clientId); }

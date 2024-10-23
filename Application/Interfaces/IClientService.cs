@@ -12,6 +12,7 @@ namespace Application.Interfaces
         List<Ticket> GetAllMyTickets(int clientId);
         bool BuyTicket(int clientId, int eventId);
         List<Event> GetAll();
+        Client GetClientById(int clientId);
         List<Ticket> Tickets();
 
     }

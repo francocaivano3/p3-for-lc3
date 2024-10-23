@@ -16,10 +16,23 @@ namespace Web.Controllers
 
         private readonly IEventService _eventService;
 
-        public EventsController(ApplicationContext context, IEventService eventService)
+        private readonly IEventOrganizerService _eventOrganizerService;
+        public EventsController(ApplicationContext context, IEventService eventService, IEventOrganizerService eventOrganizerService)
         {
             _context = context;
             _eventService = eventService;
+            _eventOrganizerService = eventOrganizerService;
+        }
+
+        [HttpGet("organizer/{organizerId}/getEventOrganizer")]
+        public IActionResult GetEventOrganizer(int organizerId)
+        {
+            var organizer = _eventOrganizerService.GetEventOrganizer(organizerId);
+            if (organizer == null)
+            {
+                return NotFound("No organizer found");
+            }
+            return Ok(organizer);
         }
 
         [HttpGet("organizer/{organizerId}/events")]
