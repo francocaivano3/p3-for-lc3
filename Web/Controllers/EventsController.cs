@@ -10,6 +10,9 @@ using Infrastructure;
 
 namespace Web.Controllers
 {
+
+    [ApiController]
+    [Route("api/[controller]")]
     public class EventsController : Controller
     {
         private readonly ApplicationContext _context;
@@ -30,7 +33,7 @@ namespace Web.Controllers
             var organizer = _eventOrganizerService.GetEventOrganizer(organizerId);
             if (organizer == null)
             {
-                return NotFound("No organizer found");
+                return NotFound("Organizer not found");
             }
             return Ok(organizer);
         }
@@ -39,14 +42,15 @@ namespace Web.Controllers
         public IActionResult GetEventsByOrganizer(int organizerId)
         {
             var events = _eventService.GetEventsByOrganizerId(organizerId);
+
             if (events == null || !events.Any())
             {
-                return NotFound("No events for this organizer");
+                return NotFound("No events for this organizer or this is not an organizer"); 
             }
             return Ok(events);
         }
 
-        [HttpPost("organizer/{organizerId}/events")]
+        [HttpPost("organizer/{organizerId}/create-events")]
 
         public IActionResult CreateEvent(int organizerId, [FromQuery]EventsDto createEventDto)
 
@@ -59,7 +63,7 @@ namespace Web.Controllers
             var eventOrganizer = _context.EventsOrganizers.Find(organizerId);
             if (eventOrganizer == null)
             {
-                return NotFound("Organizer not found.");
+                return NotFound("Organizer not found");
             }
 
 
@@ -74,7 +78,7 @@ namespace Web.Controllers
                 createEventDto.EventOrganizerId
             );
 
-            return Ok("Event created successfully.");
+            return Ok("Event created successfully");
         }
 
     }

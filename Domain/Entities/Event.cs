@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Domain.Enums;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace Domain.Entities
 
             for (int i = 1; i <= numberOfTickets; i++)
             {
-               Tickets.Add(new Ticket (i, price, this.Id, true, null));
+               Tickets.Add(new Ticket (price, this.Id, TicketState.Available, null));
             }
         }
 

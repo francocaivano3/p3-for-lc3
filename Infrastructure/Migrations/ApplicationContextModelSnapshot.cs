@@ -72,7 +72,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("PaymentMethod")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("State")
+                    b.Property<int>("State")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -89,6 +89,22 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -112,6 +128,18 @@ namespace Infrastructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasDiscriminator().HasValue("Client");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            Email = "ulisesdebonis@gmail.com",
+                            Name = "ulisesdb1",
+                            Password = "Contraseña3",
+                            Phone = "3415522313",
+                            Role = "Client",
+                            Age = 20
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.EventOrganizer", b =>
@@ -119,6 +147,17 @@ namespace Infrastructure.Migrations
                     b.HasBaseType("Domain.Entities.User");
 
                     b.HasDiscriminator().HasValue("Event Organizer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            Email = "francoberlochi@gmail.com",
+                            Name = "francob3",
+                            Password = "Contraseña1",
+                            Phone = "3415522312",
+                            Role = "Event Organizer"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.SuperAdmin", b =>
@@ -126,6 +165,17 @@ namespace Infrastructure.Migrations
                     b.HasBaseType("Domain.Entities.User");
 
                     b.HasDiscriminator().HasValue("Super Admin");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "francocaivano2002@gmail.com",
+                            Name = "francoc3",
+                            Password = "Contraseña",
+                            Phone = "3415526384",
+                            Role = "Super Admin"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Event", b =>

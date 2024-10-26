@@ -23,27 +23,27 @@ namespace Web.Controllers
             _clientService = clientService;
         }
 
-        [HttpPost("{clientId}/but-ticket/{eventId}")]
+        [HttpPost("client/{clientId}/events/{eventId}/buy-ticket")]
         public IActionResult BuyTicket(int clientId, int eventId)
         {
            var result = _clientService.BuyTicket(clientId, eventId);
 
-            if (result != null) //arreglo temporal
+            if (result == true) //arreglo temporal
             {
-                return Ok("Ticket purchased succesfully");
+                return Ok($"Ticket purchased succesfully, {result}");
             }
             else
             {
-                return BadRequest("Failed to purchase ticket");
+                return BadRequest($"Failed to purchase ticket, {result}");
             }
         }
 
-        [HttpGet("{clientId}/tickets")]
+        [HttpGet("client/{clientId}/get-tickets")]
         public IActionResult GetMyTickets(int clientId)
         {
             var tickets = _clientService.GetAllMyTickets(clientId);
 
-            if (tickets == null || !tickets.Any())
+            if (tickets == null)
             {
                 return NotFound("No tickets found for the client");
             }
@@ -51,15 +51,16 @@ namespace Web.Controllers
             return Ok(tickets);
         }
 
-        [HttpGet("{clientId}/client")]
-        public IActionResult GetClientById(int id) 
+        [HttpGet("client/{clientId}/get-client")]
+        public IActionResult GetClientById(int clientId) 
         {
-            var client = _clientService.GetClientById(id);
+            var client = _clientService.GetClientById(clientId);
             if (client == null)
             {
-                return NotFound("No client found");
+                return NotFound("Client not found");
             }
             return Ok(client);
         }
+
     }
 }

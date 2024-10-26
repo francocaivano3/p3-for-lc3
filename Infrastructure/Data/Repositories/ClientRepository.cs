@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Domain.Interfaces;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Domain.Enums;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -18,10 +19,19 @@ namespace Infrastructure.Data.Repositories
             _context = context; 
         }
 
-        public void BuyTicket(Ticket ticket)
+        public void BuyTicket(int eventId, int clientId)
         {
-            _context.Tickets.Update(ticket);
-            _context.SaveChanges();
+            var client = _context.Users.OfType<Client>().FirstOrDefault(c => c.Id == clientId);
+            var ticket = _context.Events.FirstOrDefault(e => e.Id == eventId).Tickets.FirstOrDefault(t => t.State == TicketState.Available);
+
+            if (client != null && ticket != null)
+            {
+                ticket.ClientId = clientId;
+                ticket.State = TicketState.Sold; 
+                _context.Tickets.Update(ticket);
+                client.MyTickets.Add(ticket);
+                _context.SaveChanges();
+            }
         }
         public List<Ticket> GetAllMyTickets(int clientId)
         {

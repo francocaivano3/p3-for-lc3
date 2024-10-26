@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class MyMigration : Migration
+    public partial class myMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +19,10 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(64)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(11)", nullable: false),
                     Role = table.Column<string>(type: "TEXT", maxLength: 21, nullable: false),
                     Age = table.Column<int>(type: "INTEGER", nullable: true)
                 },
@@ -61,7 +67,7 @@ namespace Infrastructure.Migrations
                     ClientId = table.Column<int>(type: "INTEGER", nullable: true),
                     Amount = table.Column<float>(type: "REAL", nullable: false),
                     PaymentMethod = table.Column<string>(type: "TEXT", nullable: true),
-                    State = table.Column<bool>(type: "INTEGER", nullable: false)
+                    State = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,6 +85,20 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "Name", "Password", "Phone", "Role" },
+                values: new object[,]
+                {
+                    { 1, "francocaivano2002@gmail.com", "francoc3", "Contraseña", "3415526384", "Super Admin" },
+                    { 2, "francoberlochi@gmail.com", "francob3", "Contraseña1", "3415522312", "Event Organizer" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Age", "Email", "Name", "Password", "Phone", "Role" },
+                values: new object[] { 3, 20, "ulisesdebonis@gmail.com", "ulisesdb1", "Contraseña3", "3415522313", "Client" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_EventOrganizerId",

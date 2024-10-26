@@ -20,8 +20,8 @@ namespace Application.Services
 
         public void CreateEvent(string name, string address, string city, DateTime date, int numberOfTickets ,string category, float price, int eventOrganizerId)
         {
-            var newEvent = new Event(name, address, city, date, numberOfTickets,category, price, eventOrganizerId);
-            _eventRepository.Add(newEvent);
+            var newEvent = new Event(name, address, city, date, numberOfTickets, category, price, eventOrganizerId);
+            _eventRepository.Add(newEvent, eventOrganizerId);
         }
 
         public Event GetEventById(int eventId)

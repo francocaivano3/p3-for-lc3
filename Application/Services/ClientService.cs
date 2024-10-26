@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -44,19 +45,9 @@ namespace Application.Services
                 return false;
             }
 
-            Ticket availableTicket = eventEntity.Tickets.FirstOrDefault(t => t.State == true);
-            if (availableTicket == null)
-            {
-                return false;
-            }
-
-            availableTicket.ClientId = clientId;
-            availableTicket.State = false;
-
-            client.MyTickets.Add(availableTicket);
 
             _clientRepository.UpdateClient(client);
-            _clientRepository.BuyTicket(availableTicket);
+            _clientRepository.BuyTicket(eventId, clientId);
 
             return true;
         }
@@ -74,9 +65,6 @@ namespace Application.Services
 
         public List<Ticket> GetAllMyTickets(int clientId) { return _clientRepository.GetAllMyTickets(clientId); }
 
-        public List<Ticket> Tickets() 
-        { 
-            return new List<Ticket>(); // Devuelve una lista de tickets
-        }
+        
     }
 }
