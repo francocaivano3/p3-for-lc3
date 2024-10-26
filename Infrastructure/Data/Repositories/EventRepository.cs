@@ -19,20 +19,18 @@ namespace Infrastructure.Data.Repositories
             _context = context;
         }
 
-        public void Add(Event eventToAdd)
+        public void Add(Event eventToAdd, int eventOrganizerId)
         {
+            var eventOrganizer = _context.EventsOrganizers.Find(eventOrganizerId);
 
-            if(eventToAdd != null)
+            if(eventToAdd != null && eventOrganizer != null)
             {
                 _context.Events.Add(eventToAdd);
-                var eventOrganizer = _context.EventsOrganizers.Find(eventToAdd.EventOrganizerId);
-                if(eventOrganizer != null)
-                {
-                    eventOrganizer.MyEvents.Add(eventToAdd);
-                }
+                eventOrganizer.MyEvents.Add(eventToAdd);
             } 
 
             _context.SaveChanges();
+
         }
         
         public Event GetById(int eventId)
@@ -49,7 +47,6 @@ namespace Infrastructure.Data.Repositories
         public IEnumerable<Event> GetEventsByOrganizerId(int organizerId)
         {
             return _context.Events
-                .Include(e => e.Tickets)
                 .Where(e => e.EventOrganizerId == organizerId)
                 .ToList();
         }

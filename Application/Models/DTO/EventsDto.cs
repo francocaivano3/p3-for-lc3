@@ -17,5 +17,6 @@ namespace Application.Models.DTO
         public string Category { get; set; } = string.Empty;
         public float Price { get; set; }
         public int EventOrganizerId { get; set; }
+
     }
 }

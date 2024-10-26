@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Infrastructure.Data.Repositories
         }
         public EventOrganizer GetEventOrganizer(int eventOrganizerId) 
         {
-            return _context.EventsOrganizers.OfType<EventOrganizer>().FirstOrDefault(e => e.Id == eventOrganizerId);
+            return _context.Users.OfType<EventOrganizer>().FirstOrDefault(e => e.Id == eventOrganizerId);
         }
     }
 }
