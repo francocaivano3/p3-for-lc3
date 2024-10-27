@@ -66,7 +66,7 @@ namespace Web.Controllers
                 return NotFound("Organizer not found");
             }
 
-            _eventService.CreateEvent(
+            var createEvent = _eventService.CreateEvent(
                 createEventDto.Name,
                 createEventDto.Address,
                 createEventDto.City,
@@ -77,10 +77,15 @@ namespace Web.Controllers
                 createEventDto.EventOrganizerId
             );
 
-            return Ok("Event created successfully");
+            if (createEvent)
+            {
+                return Ok("Event created successfully");
+                
+            }
+            return BadRequest("Not equals ids");
         }
 
-        [HttpGet("/event-organizer/{eventOrganizerId}/check-available-tickets")]
+        [HttpGet("/event-organizer/{eventOrganizerId}/check-available-tickets/{eventId}")]
         public IActionResult CheckAvailableTickets(int eventOrganizerId, int eventId)
         {
             int result = _eventOrganizerService.CheckAvailableTickets(eventOrganizerId, eventId);
@@ -88,6 +93,24 @@ namespace Web.Controllers
             {
                 return NotFound("Event not found");
             } 
+            else if (result == -2)
+            {
+                return NotFound("Organizer not found");
+            }
+            else
+            {
+                return Ok(result);
+            }
+        }
+
+        [HttpGet("/event-organizer/{eventOrganizerId}/check-sold-tickets/{eventId}")]
+        public IActionResult CheckSoldTickets(int eventOrganizerId, int eventId)
+        {
+            int result = _eventOrganizerService.CheckSoldTickets(eventOrganizerId, eventId);
+            if (result == -1)
+            {
+                return NotFound("Event not found");
+            }
             else if (result == -2)
             {
                 return NotFound("Organizer not found");

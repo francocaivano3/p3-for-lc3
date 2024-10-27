@@ -19,7 +19,7 @@ namespace Infrastructure.Data.Repositories
             _context = context;
         }
 
-        public void Add(Event eventToAdd, int eventOrganizerId)
+        public bool Add(Event eventToAdd, int eventOrganizerId)
         {
             var eventOrganizer = _context.EventsOrganizers.Find(eventOrganizerId);
 
@@ -27,10 +27,11 @@ namespace Infrastructure.Data.Repositories
             {
                 _context.Events.Add(eventToAdd);
                 eventOrganizer.MyEvents.Add(eventToAdd);
-            } 
+                _context.SaveChanges();
+                return true;
+            }
 
-            _context.SaveChanges();
-
+            return false;
         }
         
         public Event GetById(int eventId)

@@ -9,7 +9,7 @@ namespace Domain.Interfaces
 {
     public interface IEventRepository
     {
-        void Add(Event eventToAdd, int eventOrganizerId);
+        bool Add(Event eventToAdd, int eventOrganizerId);
         Event GetById(int eventId);
         IEnumerable<Event> GetAll();
         IEnumerable<Event> GetEventsByOrganizerId(int organizerId);
