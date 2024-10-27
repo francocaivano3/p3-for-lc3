@@ -47,15 +47,12 @@ namespace Application.Services
 
 
             _clientRepository.UpdateClient(client);
-            _clientRepository.BuyTicket(eventId, clientId);
-
-            return true;
+            return _clientRepository.BuyTicket(eventId, clientId);
         }
 
         public List<Event> GetAll() 
         { 
-            var a = new List<Event>();
-            return a; // Devuelve una lista de eventos
+            return _clientRepository.GetAllEvents();
         }
 
         public Client GetClientById(int clientId) 

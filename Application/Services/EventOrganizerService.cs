@@ -21,5 +21,15 @@ namespace Application.Services
         {
             return _eventOrganizerRepository.GetEventOrganizer(eventOrganizerId);
         }
+
+        public int CheckAvailableTickets(int eventOrganizerId, int eventId)
+        {
+            return _eventOrganizerRepository.CheckAvailableTickets(eventOrganizerId, eventId);
+        }
+
+        public int CheckSoldTickets(int eventOrganizerId, int eventId)
+        {
+            return _eventOrganizerRepository.CheckSoldTickets(eventOrganizerId, eventId);
+        }
     }
 }

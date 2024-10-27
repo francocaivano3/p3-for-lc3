@@ -66,7 +66,6 @@ namespace Web.Controllers
                 return NotFound("Organizer not found");
             }
 
-
             _eventService.CreateEvent(
                 createEventDto.Name,
                 createEventDto.Address,
@@ -81,5 +80,22 @@ namespace Web.Controllers
             return Ok("Event created successfully");
         }
 
+        [HttpGet("/event-organizer/{eventOrganizerId}/check-available-tickets")]
+        public IActionResult CheckAvailableTickets(int eventOrganizerId, int eventId)
+        {
+            int result = _eventOrganizerService.CheckAvailableTickets(eventOrganizerId, eventId);
+            if(result == -1)
+            {
+                return NotFound("Event not found");
+            } 
+            else if (result == -2)
+            {
+                return NotFound("Organizer not found");
+            }
+            else
+            {
+                return Ok(result);
+            }
+        }
     }
 }
