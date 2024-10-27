@@ -23,22 +23,22 @@ namespace Web.Controllers
             _clientService = clientService;
         }
 
-        [HttpPost("client/{clientId}/events/{eventId}/buy-ticket")]
+        [HttpPost("{clientId}/events/{eventId}/buy-ticket")]
         public IActionResult BuyTicket(int clientId, int eventId)
         {
            var result = _clientService.BuyTicket(clientId, eventId);
 
-            if (result == true) //arreglo temporal
+            if (result) //arreglo temporal
             {
-                return Ok($"Ticket purchased succesfully, {result}");
+                return Ok("Ticket purchased succesfully");
             }
             else
             {
-                return BadRequest($"Failed to purchase ticket, {result}");
+                return BadRequest("Failed to purchase ticket");
             }
         }
 
-        [HttpGet("client/{clientId}/get-tickets")]
+        [HttpGet("{clientId}/get-tickets")]
         public IActionResult GetMyTickets(int clientId)
         {
             var tickets = _clientService.GetAllMyTickets(clientId);
@@ -51,7 +51,7 @@ namespace Web.Controllers
             return Ok(tickets);
         }
 
-        [HttpGet("client/{clientId}/get-client")]
+        [HttpGet("{clientId}/get-client")]
         public IActionResult GetClientById(int clientId) 
         {
             var client = _clientService.GetClientById(clientId);
@@ -60,6 +60,12 @@ namespace Web.Controllers
                 return NotFound("Client not found");
             }
             return Ok(client);
+        }
+
+        [HttpGet("get-all-events")]
+        public IActionResult GetAllEvents()
+        {
+            return Ok(_clientService.GetAll());
         }
 
     }

@@ -10,5 +10,7 @@ namespace Domain.Interfaces
     public interface IEventOrganizerRepository
     {
         EventOrganizer GetEventOrganizer(int eventOrganizerId);
+        int CheckAvailableTickets(int eventOrganizerId, int eventId);
+        int CheckSoldTickets(int eventOrganizerId, int eventId);
     }
 }
