@@ -15,8 +15,7 @@ namespace Infrastructure.Data.Repositories
         }
         public User? GetUserByUserName(string userName)
         {
-            return null;
-           // return _context.Users.SingleOrDefault(p => p.UserName == userName); ; 
+            return _context.Users.FirstOrDefault(e => e.Email == userName);
         }
     }
 }

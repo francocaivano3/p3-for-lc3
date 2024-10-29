@@ -23,8 +23,8 @@ namespace Infrastructure
             modelBuilder.Entity<User>()
                 .HasDiscriminator<string>("Role")
                 .HasValue<Client>("Client")
-                .HasValue<EventOrganizer>("Event Organizer")
-                .HasValue<SuperAdmin>("Super Admin");
+                .HasValue<EventOrganizer>("EventOrganizer")
+                .HasValue<SuperAdmin>("SuperAdmin");
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.Event) 
@@ -59,7 +59,7 @@ namespace Infrastructure
                     Email = "francocaivano2002@gmail.com",
                     Password = "Contraseña",
                     Phone = "3415526384",
-                    Role = "Super Admin"
+                    Role = "SuperAdmin"
                 }
             );
 
@@ -71,7 +71,7 @@ namespace Infrastructure
                     Email = "francoberlochi@gmail.com",
                     Password = "Contraseña1",
                     Phone = "3415522312",
-                    Role = "Event Organizer",
+                    Role = "EventOrganizer",
                     MyEvents = new List<Event>()
                 }
             );

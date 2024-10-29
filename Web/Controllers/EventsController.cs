@@ -6,11 +6,12 @@ using Application.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data.Repositories;
 using Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Web.Controllers
 {
-
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EventsController : Controller
@@ -27,6 +28,7 @@ namespace Web.Controllers
             _eventOrganizerService = eventOrganizerService;
         }
 
+        [Authorize(Policy = "SuperAdmin")]
         [HttpGet("organizer/{organizerId}/getEventOrganizer")]
         public IActionResult GetEventOrganizer(int organizerId)
         {

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Infrastructure.Services
 {
@@ -25,33 +26,28 @@ namespace Infrastructure.Services
             _options = options.Value;
         }
 
-       /* private User? ValidateUser(AuthenticationRequest authenticationRequest)
+        private User? ValidateUser(AuthenticationRequest authenticationRequest)
         {
             if (string.IsNullOrEmpty(authenticationRequest.UserName) || string.IsNullOrEmpty(authenticationRequest.Password))
                 return null;
 
             var user = _userRepository.GetUserByUserName(authenticationRequest.UserName);
 
-            if (user == null) return null;
+            if (user == null) { return null; }
+            else if(user.Email != authenticationRequest.UserName || user.Password != authenticationRequest.Password) 
+            { return null; }
+            else {  return user; }
 
-            if (authenticationRequest.UserType == typeof(Student).Name || authenticationRequest.UserType == typeof(Professor).Name)
-            {
-                if (user.UserType == authenticationRequest.UserType && user.Password == authenticationRequest.Password) return user;
-            }
-
-          return null;
-
-        }*/
+        }
           public string Autenticar(AuthenticationRequest authenticationRequest)
           {
-            return authenticationRequest.UserName;
            
-           /*   //Paso 1: Validamos las credenciales
+              //Paso 1: Validamos las credenciales
               var user = ValidateUser(authenticationRequest); //Lo primero que hacemos es llamar a una función que valide los parámetros que enviamos.
 
               if (user == null)
               {
-                  throw new NotAllowedException("User authentication failed");
+                  return ("User authentication failed"); //solucionar con exepciones custom
               }
 
 
@@ -62,12 +58,12 @@ namespace Infrastructure.Services
 
               //Los claims son datos en clave->valor que nos permite guardar data del usuario.
               var claimsForToken = new List<Claim>();
-              claimsForToken.Add(new Claim("sub", user.Id.ToString())); //"sub" es una key estándar que significa unique user identifier, es decir, si mandamos el id del usuario por convención lo hacemos con la key "sub".
-              claimsForToken.Add(new Claim("given_name", user.Name)); //Lo mismo para given_name y family_name, son las convenciones para nombre y apellido. Ustedes pueden usar lo que quieran, pero si alguien que no conoce la app
-              claimsForToken.Add(new Claim("family_name", user.LastName)); //quiere usar la API por lo general lo que espera es que se estén usando estas keys.
-              claimsForToken.Add(new Claim("role", authenticationRequest.UserType)); //Debería venir del usuario
+              claimsForToken.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+              claimsForToken.Add(new Claim(ClaimTypes.Name, user.Name));
+              claimsForToken.Add(new Claim(ClaimTypes.Role, user.Role));
 
-              var jwtSecurityToken = new JwtSecurityToken( //agregar using System.IdentityModel.Tokens.Jwt; Acá es donde se crea el token con toda la data que le pasamos antes.
+
+            var jwtSecurityToken = new JwtSecurityToken( //agregar using System.IdentityModel.Tokens.Jwt; Acá es donde se crea el token con toda la data que le pasamos antes.
                 _options.Issuer,
                 _options.Audience,
                 claimsForToken,
@@ -79,7 +75,7 @@ namespace Infrastructure.Services
                   .WriteToken(jwtSecurityToken);
 
               return tokenToReturn.ToString();
-         */}
+         }
 
         public class AutenticacionServiceOptions
         {

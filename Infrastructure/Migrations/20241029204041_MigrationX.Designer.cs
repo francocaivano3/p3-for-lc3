@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241025234415_myMigration")]
-    partial class myMigration
+    [Migration("20241029204041_MigrationX")]
+    partial class MigrationX
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,7 +159,7 @@ namespace Infrastructure.Migrations
                             Name = "francob3",
                             Password = "Contraseña1",
                             Phone = "3415522312",
-                            Role = "Event Organizer"
+                            Role = "EventOrganizer"
                         });
                 });
 
@@ -177,7 +177,7 @@ namespace Infrastructure.Migrations
                             Name = "francoc3",
                             Password = "Contraseña",
                             Phone = "3415526384",
-                            Role = "Super Admin"
+                            Role = "SuperAdmin"
                         });
                 });
 

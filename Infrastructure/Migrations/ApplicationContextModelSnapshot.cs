@@ -156,7 +156,7 @@ namespace Infrastructure.Migrations
                             Name = "francob3",
                             Password = "Contraseña1",
                             Phone = "3415522312",
-                            Role = "Event Organizer"
+                            Role = "EventOrganizer"
                         });
                 });
 
@@ -174,7 +174,7 @@ namespace Infrastructure.Migrations
                             Name = "francoc3",
                             Password = "Contraseña",
                             Phone = "3415526384",
-                            Role = "Super Admin"
+                            Role = "SuperAdmin"
                         });
                 });
 
