@@ -70,6 +70,8 @@ builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntentica
 );
 
 builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Client", policy => policy.RequireRole("Client", "SuperAdmin"));
+    options.AddPolicy("EventOrganizer", policy => policy.RequireRole("EventOrganizer", "SuperAdmin"));
     options.AddPolicy("SuperAdmin", policy => policy.RequireRole("SuperAdmin"));
 });
 
