@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,21 @@ namespace Application.Models.DTO
         public string Category { get; set; } = string.Empty;
         public float Price { get; set; }
         public int EventOrganizerId { get; set; }
+
+        public static EventsDto Create(Event eventToCreate)
+        {
+            EventsDto dto = new EventsDto();
+            dto.Name = eventToCreate.Name;
+            dto.Address = eventToCreate.Address;
+            dto.City = eventToCreate.City;
+            dto.Date = eventToCreate.Date;
+            dto.NumberOfTickets = eventToCreate.NumberOfTickets;
+            dto.Category = eventToCreate.Category;
+            dto.Price = eventToCreate.Price;
+            dto.EventOrganizerId = eventToCreate.EventOrganizerId;
+
+            return dto;
+        }
 
     }
 }
