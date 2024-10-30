@@ -7,10 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data.Repositories;
 using Infrastructure;
 using Application.Services;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Web.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ClientController : Controller
@@ -23,6 +25,9 @@ namespace Web.Controllers
             _clientService = clientService;
         }
 
+        [HttpPost("")]
+
+        [Authorize(Policy = "Client")]
         [HttpPost("{clientId}/events/{eventId}/buy-ticket")]
         public IActionResult BuyTicket(int clientId, int eventId)
         {
@@ -38,6 +43,7 @@ namespace Web.Controllers
             }
         }
 
+        [Authorize(Policy = "Client")]
         [HttpGet("{clientId}/get-tickets")]
         public IActionResult GetMyTickets(int clientId)
         {
@@ -50,7 +56,7 @@ namespace Web.Controllers
 
             return Ok(tickets);
         }
-
+        [Authorize(Policy = "EventOrganizer")]
         [HttpGet("{clientId}/get-client")]
         public IActionResult GetClientById(int clientId) 
         {
@@ -62,6 +68,7 @@ namespace Web.Controllers
             return Ok(client);
         }
 
+        [Authorize(Policy = "Client")]
         [HttpGet("get-all-events")]
         public IActionResult GetAllEvents()
         {

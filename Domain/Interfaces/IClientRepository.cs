@@ -9,6 +9,7 @@ namespace Domain.Interfaces
 {
     public interface IClientRepository
     {
+        
         bool BuyTicket(int eventId, int clientId);
         List<Ticket> GetAllMyTickets(int clientId);
         Client GetClientById(int id);

@@ -19,6 +19,7 @@ namespace Infrastructure.Data.Repositories
             _context = context; 
         }
 
+       
         public bool BuyTicket(int eventId, int clientId)
         {
             var client = _context.Users.OfType<Client>().FirstOrDefault(c => c.Id == clientId);
