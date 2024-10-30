@@ -25,8 +25,6 @@ namespace Web.Controllers
             _clientService = clientService;
         }
 
-        [HttpPost("")]
-
         [Authorize(Policy = "Client")]
         [HttpPost("{clientId}/events/{eventId}/buy-ticket")]
         public IActionResult BuyTicket(int clientId, int eventId)
@@ -56,6 +54,7 @@ namespace Web.Controllers
 
             return Ok(tickets);
         }
+
         [Authorize(Policy = "EventOrganizer")]
         [HttpGet("{clientId}/get-client")]
         public IActionResult GetClientById(int clientId) 

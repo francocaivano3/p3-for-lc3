@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Models.DTO;
+using Application.Models.Request;
 using Domain.Entities;
 
 namespace Application.Interfaces
@@ -10,10 +12,9 @@ namespace Application.Interfaces
     public interface IEventService
     {
 
-        bool CreateEvent(string name, string address, string city, DateTime date, int numberOfTickets, string category, float price, int eventOrganizerId);
-
-        Event GetEventById(int eventId);
-        List<Event> GetAllEvents();
+        bool CreateEvent(EventsRequest eventsRequest);
+        EventsDto GetEventById(int eventId);
+        List<EventsDto> GetAllEvents();
         List<Event> GetEventsByOrganizerId(int organizerId);
         void UpdateEvent(Event eventToUpdate);
         void DeleteEvent(int eventId);

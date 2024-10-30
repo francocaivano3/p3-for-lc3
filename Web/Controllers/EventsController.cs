@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data.Repositories;
 using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
+using Application.Models.Request;
 
 
 namespace Web.Controllers
@@ -52,12 +53,11 @@ namespace Web.Controllers
             return Ok(events);
         }
 
+        [Authorize(Policy = "EventOrganizer")]
         [HttpPost("organizer/{organizerId}/create-events")]
-
-        public IActionResult CreateEvent(int organizerId, [FromQuery]EventsDto createEventDto)
-
+        public IActionResult CreateEvent(int organizerId, [FromQuery]EventsRequest createEventRequest)
         {
-            if (createEventDto == null)
+            if (createEventRequest == null)
             {
                 return BadRequest("Invalid event data");
             }
@@ -68,16 +68,7 @@ namespace Web.Controllers
                 return NotFound("Organizer not found");
             }
 
-            var createEvent = _eventService.CreateEvent(
-                createEventDto.Name,
-                createEventDto.Address,
-                createEventDto.City,
-                createEventDto.Date,
-                createEventDto.NumberOfTickets,
-                createEventDto.Category,
-                createEventDto.Price,
-                createEventDto.EventOrganizerId
-            );
+            var createEvent = _eventService.CreateEvent(createEventRequest);
 
             if (createEvent)
             {
@@ -87,6 +78,7 @@ namespace Web.Controllers
             return BadRequest("Not equals ids");
         }
 
+        [Authorize(Policy = "EventOrganizer")]
         [HttpGet("/event-organizer/{eventOrganizerId}/check-available-tickets/{eventId}")]
         public IActionResult CheckAvailableTickets(int eventOrganizerId, int eventId)
         {
@@ -105,6 +97,7 @@ namespace Web.Controllers
             }
         }
 
+        [Authorize(Policy = "EventOrganizer")]
         [HttpGet("/event-organizer/{eventOrganizerId}/check-sold-tickets/{eventId}")]
         public IActionResult CheckSoldTickets(int eventOrganizerId, int eventId)
         {

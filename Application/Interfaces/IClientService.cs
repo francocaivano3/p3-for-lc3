@@ -10,7 +10,7 @@ namespace Application.Interfaces
 {
     public interface IClientService
     {
-        
+        //bool CreateClient();
         List<Ticket> GetAllMyTickets(int clientId);
         bool BuyTicket(int clientId, int eventId);
         List<Event> GetAll();

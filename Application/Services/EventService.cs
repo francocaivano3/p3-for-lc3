@@ -6,33 +6,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
+using Application.Models.Request;
+using Application.Models.DTO;
 
 namespace Application.Services
 {
     public class EventService : IEventService
     {
         private readonly IEventRepository _eventRepository;
-
         public EventService(IEventRepository eventRepository)
         {
             _eventRepository = eventRepository;
         }
 
-        public bool CreateEvent(string name, string address, string city, DateTime date, int numberOfTickets ,string category, float price, int eventOrganizerId)
-        {
-            var newEvent = new Event(name, address, city, date, numberOfTickets, category, price, eventOrganizerId);
-            return _eventRepository.Add(newEvent, eventOrganizerId);
-            
-        }
-
-        public Event GetEventById(int eventId)
-        {
-            return _eventRepository.GetById(eventId);
-        }
-
-        public List<Event> GetAllEvents() 
+        public bool CreateEvent(EventsRequest eventRequest) 
         { 
-            return _eventRepository.GetAll().ToList();
+            var newEvent = new Event(eventRequest.Name, eventRequest.Address, eventRequest.City, eventRequest.Date, eventRequest.NumberOfTickets, eventRequest.Category, eventRequest.Price, eventRequest.EventOrganizerId);
+            return _eventRepository.Add(newEvent, eventRequest.EventOrganizerId);
+        }
+
+        public EventsDto GetEventById(int eventId)
+        {
+            var eventToGet = _eventRepository.GetById(eventId);
+            return EventsDto.Create(eventToGet);
+        }
+
+        public List<EventsDto> GetAllEvents() 
+        { 
+            var events = _eventRepository.GetAll();
+            var eventsDto = new List<EventsDto>();
+            foreach (var e in events)
+            {
+                eventsDto.Add(EventsDto.Create(e));
+            }
+            return eventsDto;
         }
 
         public List<Event> GetEventsByOrganizerId(int organizerId)

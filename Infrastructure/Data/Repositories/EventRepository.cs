@@ -36,7 +36,6 @@ namespace Infrastructure.Data.Repositories
         
         public Event GetById(int eventId)
         {
-            //return _context.Events.Include(e => e.Tickets).FirstOrDefault(e => e.Id == eventId);
             return _context.Events.FirstOrDefault(e => e.Id == eventId);
         }
 
