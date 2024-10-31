@@ -7,6 +7,7 @@ using Application.Interfaces;
 using Domain.Interfaces;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Application.Models.DTO;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -19,7 +20,7 @@ namespace Infrastructure.Data.Repositories
             _context = context;
         }
 
-        public bool Add(Event eventToAdd, int eventOrganizerId)
+        public Event Add(Event eventToAdd, int eventOrganizerId)
         {
             var eventOrganizer = _context.EventsOrganizers.Find(eventOrganizerId);
 
@@ -28,10 +29,10 @@ namespace Infrastructure.Data.Repositories
                 _context.Events.Add(eventToAdd);
                 eventOrganizer.MyEvents.Add(eventToAdd);
                 _context.SaveChanges();
-                return true;
+                return eventToAdd;
             }
 
-            return false;
+            return null;
         }
         
         public Event GetById(int eventId)

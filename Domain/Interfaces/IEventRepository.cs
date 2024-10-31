@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities;
 
+
 namespace Domain.Interfaces
 {
     public interface IEventRepository
     {
-        bool Add(Event eventToAdd, int eventOrganizerId);
+        Event Add(Event eventToAdd, int eventOrganizerId);
         Event GetById(int eventId);
         IEnumerable<Event> GetAll();
         IEnumerable<Event> GetEventsByOrganizerId(int organizerId);
