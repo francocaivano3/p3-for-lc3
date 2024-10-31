@@ -10,6 +10,7 @@ namespace Application.Models.DTO
 {
     public class EventsDto
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
@@ -22,6 +23,7 @@ namespace Application.Models.DTO
         public static EventsDto Create(Event eventToCreate)
         {
             EventsDto dto = new EventsDto();
+            dto.Id = eventToCreate.Id;
             dto.Name = eventToCreate.Name;
             dto.Address = eventToCreate.Address;
             dto.City = eventToCreate.City;

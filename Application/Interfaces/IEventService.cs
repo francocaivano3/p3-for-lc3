@@ -12,7 +12,7 @@ namespace Application.Interfaces
     public interface IEventService
     {
 
-        bool CreateEvent(EventsRequest eventsRequest);
+        EventsDto CreateEvent(EventsRequest eventsRequest);
         EventsDto GetEventById(int eventId);
         List<EventsDto> GetAllEvents();
         List<Event> GetEventsByOrganizerId(int organizerId);

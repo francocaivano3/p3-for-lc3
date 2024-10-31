@@ -8,6 +8,7 @@ using Infrastructure.Data.Repositories;
 using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Application.Models.Request;
+using Application.Services;
 
 
 namespace Web.Controllers
@@ -70,12 +71,24 @@ namespace Web.Controllers
 
             var createEvent = _eventService.CreateEvent(createEventRequest);
 
-            if (createEvent)
+            if (createEvent != null)
             {
-                return Ok("Event created successfully");
+                return CreatedAtAction(nameof(GetEventById), new { id = createEvent.Id }, createEvent);
                 
             }
             return BadRequest("Not equals ids");
+        }
+
+        [Authorize(Policy = "EventOrganizer")]
+        [HttpGet("/get-event-by-id/{eventId}")]
+        public IActionResult GetEventById(int eventId)
+        {
+            var eventToSearch = _eventService.GetEventById(eventId);
+            if (eventToSearch == null)
+            {
+                return NotFound("Event not found");
+            }
+            return Ok(eventToSearch);
         }
 
         [Authorize(Policy = "EventOrganizer")]
