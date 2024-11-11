@@ -19,7 +19,10 @@ namespace Web.Controllers
         public ActionResult<string> Autenticar(AuthenticationRequest authenticationRequest) 
         {
             string token = _authenticationService.Autenticar(authenticationRequest); 
-
+            if(token == null)
+            {
+                return BadRequest("Invalid credentials");
+            }
             return Ok(token);
         }
     }

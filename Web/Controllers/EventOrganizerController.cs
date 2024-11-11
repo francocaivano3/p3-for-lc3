@@ -48,12 +48,12 @@ namespace Web.Controllers
 
 
         [Authorize(Policy = "SuperAdmin")]
-        [HttpGet("organizer/{organizerId}")]
-        public IActionResult GetEventOrganizer(int organizerId)
+        [HttpGet("organizer/{Id}")]
+        public IActionResult GetEventOrganizer(int Id)
         {
             try
             {
-                var organizer = _eventOrganizerService.GetEventOrganizer(organizerId);
+                var organizer = _eventOrganizerService.GetEventOrganizer(Id);
                 return Ok(organizer);
             }
             catch (NotFoundException ex) 

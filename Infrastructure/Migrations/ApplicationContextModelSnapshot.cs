@@ -166,7 +166,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "string",
+                            Email = "franco@gmail.com",
                             Name = "francoc3",
                             Password = "string",
                             Phone = "3415526384",

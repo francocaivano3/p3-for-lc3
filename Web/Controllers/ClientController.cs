@@ -99,7 +99,7 @@ namespace Web.Controllers
                 _clientService.Delete(id);
                 return NoContent();
             }
-            return BadRequest("Not found");
+            return NotFound("Not found");
         }
 
         [Authorize(Policy = "SuperAdmin")]

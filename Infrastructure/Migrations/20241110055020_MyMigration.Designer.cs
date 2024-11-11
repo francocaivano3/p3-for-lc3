@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241101220807_myMigration")]
-    partial class myMigration
+    [Migration("20241110055020_MyMigration")]
+    partial class MyMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,7 +169,7 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "string",
+                            Email = "franco@gmail.com",
                             Name = "francoc3",
                             Password = "string",
                             Phone = "3415526384",

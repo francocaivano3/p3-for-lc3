@@ -34,7 +34,7 @@ namespace Web.Controllers
 
         [Authorize(Policy = "EventOrganizer")]
         [HttpPost("/create-event")]
-        public IActionResult CreateEvent([FromQuery]EventsCreateRequest createEventRequest)
+        public IActionResult CreateEvent(EventsCreateRequest createEventRequest)
         {
             if (createEventRequest == null)
             {
@@ -136,7 +136,7 @@ namespace Web.Controllers
 
         [Authorize(Policy = "EventOrganizer")]
         [HttpPut("/update-event")]
-        public IActionResult Update([FromQuery] EventUpdateRequest eventToUpdate)
+        public IActionResult Update( EventUpdateRequest eventToUpdate)
         { 
             try
             {

@@ -29,6 +29,10 @@ namespace Application.Services
         public EventsDto GetEventById(int eventId)
         {
             var eventToGet = _eventRepository.GetById(eventId);
+            if(eventToGet == null)
+            {
+                return null;
+            }
             return EventsDto.Create(eventToGet);
         }
 
