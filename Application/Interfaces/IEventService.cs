@@ -12,11 +12,11 @@ namespace Application.Interfaces
     public interface IEventService
     {
 
-        EventsDto CreateEvent(EventsRequest eventsRequest);
+        EventsDto CreateEvent(EventsCreateRequest eventsRequest);
         EventsDto GetEventById(int eventId);
         List<EventsDto> GetAllEvents();
-        List<Event> GetEventsByOrganizerId(int organizerId);
-        void UpdateEvent(Event eventToUpdate);
+        List<EventsDto> GetEventsByOrganizerId(int organizerId);
+        void UpdateEvent(EventUpdateRequest eventToUpdate);
         void DeleteEvent(int eventId);
     }
 }

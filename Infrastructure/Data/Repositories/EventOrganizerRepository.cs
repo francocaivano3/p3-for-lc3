@@ -19,7 +19,8 @@ namespace Infrastructure.Data.Repositories
         }
         public EventOrganizer GetEventOrganizer(int eventOrganizerId) 
         {
-            return _context.Users.OfType<EventOrganizer>().FirstOrDefault(e => e.Id == eventOrganizerId);
+            return _context.EventsOrganizers.Find(eventOrganizerId);
+            //return _context.Users.OfType<EventOrganizer>().FirstOrDefault(e => e.Id == eventOrganizerId);
         }
 
         public int CheckAvailableTickets(int eventOrganizerId, int eventId)
@@ -39,6 +40,11 @@ namespace Infrastructure.Data.Repositories
             return myEvent.Tickets.Count(t => t.State == TicketState.Available);
         }
 
+        public List<EventOrganizer> GetAll()
+        {
+            return _context.Users.OfType<EventOrganizer>().ToList();
+        }
+
         public int CheckSoldTickets(int eventOrganizerId, int eventId)
         {
             var myEvent = _context.Events.Include(t => t.Tickets).FirstOrDefault(e => e.Id == eventId);
@@ -54,6 +60,43 @@ namespace Infrastructure.Data.Repositories
             }
 
             return myEvent.Tickets.Count(t => t.State == TicketState.Sold);
+        }
+
+        public EventOrganizer Add(EventOrganizer eventOrganizer)
+        {
+
+            if (eventOrganizer != null)
+            {
+                _context.Users.Add(eventOrganizer);
+                _context.SaveChanges();
+                return eventOrganizer;
+            }
+
+            return null;
+        }
+
+        public void Update(int id, EventOrganizer eventOrganizer)
+        {
+            var existingOrganizer = _context.Users.OfType<EventOrganizer>().FirstOrDefault(e => e.Id == id);
+            if (existingOrganizer != null)
+            {
+                existingOrganizer.Name = eventOrganizer.Name;
+                existingOrganizer.Email = eventOrganizer.Email;
+                existingOrganizer.Password = eventOrganizer.Password;
+                existingOrganizer.Phone = eventOrganizer.Phone;
+                _context.Update(existingOrganizer);
+                _context.SaveChanges();
+            }
+        }
+
+        public void Delete(int eventOrganizerId)
+        {
+            var organizer = _context.Users.OfType<EventOrganizer>().FirstOrDefault(e => e.Id == eventOrganizerId);
+            if(organizer != null)
+            {
+                _context.EventsOrganizers.Remove(organizer);
+                _context.SaveChanges();
+            }
         }
     }
 }

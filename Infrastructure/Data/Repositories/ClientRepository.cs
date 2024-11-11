@@ -7,6 +7,7 @@ using Domain.Interfaces;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Domain.Enums;
+using Domain.Exceptions;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -19,11 +20,26 @@ namespace Infrastructure.Data.Repositories
             _context = context; 
         }
 
+        public Client CreateClient(Client client)
+        {
+            if(client != null)
+            {
+                _context.Users.Add(client);
+                _context.SaveChanges();
+                return client;
+            }
+            return null;
+        }
        
         public bool BuyTicket(int eventId, int clientId)
         {
             var client = _context.Users.OfType<Client>().FirstOrDefault(c => c.Id == clientId);
             var ticket = _context.Tickets.Where(t => t.EventId == eventId).FirstOrDefault(t => t.State == TicketState.Available);
+            
+            //if(ticket == null)
+            //{
+            //    throw new NotFoundException("No tickets available for this event");
+            //}
 
             if (client != null && ticket != null)
             {
@@ -49,10 +65,28 @@ namespace Infrastructure.Data.Repositories
             return _context.Users.OfType<Client>().FirstOrDefault(c => c.Id == id);
         }
 
-        public void UpdateClient(Client client)
+        public void UpdateClient(int id, Client client)
         {
-            _context.Users.Update(client);
-            _context.SaveChanges();
+            var existingClient = _context.Clients.OfType<Client>().FirstOrDefault(c => c.Id == id);
+            if(existingClient != null)
+            {
+                existingClient.Name = client.Name;
+                existingClient.Email = client.Email;
+                existingClient.Password = client.Password;
+                existingClient.Phone = client.Phone;
+                _context.Users.Update(existingClient);
+                _context.SaveChanges();
+            }
+        }
+
+        public void DeleteClient(int id)
+        {
+           var client =  _context.Users.OfType<Client>().FirstOrDefault(c => c.Id == id);
+           if(client != null)
+            {
+                _context.Clients.Remove(client);
+                _context.SaveChanges();
+            }
         }
 
         public List<Event> GetAllEvents()

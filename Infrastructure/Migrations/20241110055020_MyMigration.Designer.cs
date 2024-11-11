@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241029204041_MigrationX")]
-    partial class MigrationX
+    [Migration("20241110055020_MyMigration")]
+    partial class MyMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,9 +127,6 @@ namespace Infrastructure.Migrations
                 {
                     b.HasBaseType("Domain.Entities.User");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("INTEGER");
-
                     b.HasDiscriminator().HasValue("Client");
 
                     b.HasData(
@@ -140,8 +137,7 @@ namespace Infrastructure.Migrations
                             Name = "ulisesdb1",
                             Password = "Contraseña3",
                             Phone = "3415522313",
-                            Role = "Client",
-                            Age = 20
+                            Role = "Client"
                         });
                 });
 
@@ -149,7 +145,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasBaseType("Domain.Entities.User");
 
-                    b.HasDiscriminator().HasValue("Event Organizer");
+                    b.HasDiscriminator().HasValue("EventOrganizer");
 
                     b.HasData(
                         new
@@ -167,15 +163,15 @@ namespace Infrastructure.Migrations
                 {
                     b.HasBaseType("Domain.Entities.User");
 
-                    b.HasDiscriminator().HasValue("Super Admin");
+                    b.HasDiscriminator().HasValue("SuperAdmin");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Email = "francocaivano2002@gmail.com",
+                            Email = "franco@gmail.com",
                             Name = "francoc3",
-                            Password = "Contraseña",
+                            Password = "string",
                             Phone = "3415526384",
                             Role = "SuperAdmin"
                         });

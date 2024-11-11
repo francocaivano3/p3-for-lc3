@@ -19,7 +19,7 @@ namespace Application.Services
             _eventRepository = eventRepository;
         }
 
-        public EventsDto CreateEvent(EventsRequest eventRequest) 
+        public EventsDto CreateEvent(EventsCreateRequest eventRequest) 
         { 
             var newEvent = new Event(eventRequest.Name, eventRequest.Address, eventRequest.City, eventRequest.Date, eventRequest.NumberOfTickets, eventRequest.Category, eventRequest.Price, eventRequest.EventOrganizerId);
             var createdEvent = _eventRepository.Add(newEvent, eventRequest.EventOrganizerId);
@@ -29,6 +29,10 @@ namespace Application.Services
         public EventsDto GetEventById(int eventId)
         {
             var eventToGet = _eventRepository.GetById(eventId);
+            if(eventToGet == null)
+            {
+                return null;
+            }
             return EventsDto.Create(eventToGet);
         }
 
@@ -43,13 +47,20 @@ namespace Application.Services
             return eventsDto;
         }
 
-        public List<Event> GetEventsByOrganizerId(int organizerId)
+        public List<EventsDto> GetEventsByOrganizerId(int organizerId)
         {
-            return _eventRepository.GetEventsByOrganizerId(organizerId).ToList();
+            var eventsByOrg = _eventRepository.GetEventsByOrganizerId(organizerId).ToList();
+            var eventsDto = new List<EventsDto>();
+            foreach(var e in eventsByOrg)
+            {
+                eventsDto.Add(EventsDto.Create(e));
+            }
+            return eventsDto;
         }
 
-        public void UpdateEvent(Event eventToUpdate)
+        public void UpdateEvent(EventUpdateRequest eventUpdateRequest)
         {
+            var eventToUpdate = new Event(eventUpdateRequest.Id, eventUpdateRequest.Name, eventUpdateRequest.Address, eventUpdateRequest.City, eventUpdateRequest.Date, eventUpdateRequest.Category, eventUpdateRequest.Price);
             _eventRepository.Update(eventToUpdate);
         }
 

@@ -15,8 +15,17 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddCors(options => //para conectar la api con lc3
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:5174") // Permite el origen del frontend
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials()); // Permite enviar cookies si es necesario
+});
 builder.Services.AddControllers();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(setupAction =>
@@ -88,7 +97,7 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 
 var app = builder.Build();
-
+app.UseCors("AllowSpecificOrigin"); //lc3
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

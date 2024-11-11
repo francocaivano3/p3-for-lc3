@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationX : Migration
+    public partial class MyMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,8 +23,7 @@ namespace Infrastructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(64)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(11)", nullable: false),
-                    Role = table.Column<string>(type: "TEXT", maxLength: 21, nullable: false),
-                    Age = table.Column<int>(type: "INTEGER", nullable: true)
+                    Role = table.Column<string>(type: "TEXT", maxLength: 21, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,14 +90,10 @@ namespace Infrastructure.Migrations
                 columns: new[] { "Id", "Email", "Name", "Password", "Phone", "Role" },
                 values: new object[,]
                 {
-                    { 1, "francocaivano2002@gmail.com", "francoc3", "Contraseña", "3415526384", "SuperAdmin" },
-                    { 2, "francoberlochi@gmail.com", "francob3", "Contraseña1", "3415522312", "EventOrganizer" }
+                    { 1, "franco@gmail.com", "francoc3", "string", "3415526384", "SuperAdmin" },
+                    { 2, "francoberlochi@gmail.com", "francob3", "Contraseña1", "3415522312", "EventOrganizer" },
+                    { 3, "ulisesdebonis@gmail.com", "ulisesdb1", "Contraseña3", "3415522313", "Client" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Age", "Email", "Name", "Password", "Phone", "Role" },
-                values: new object[] { 3, 20, "ulisesdebonis@gmail.com", "ulisesdb1", "Contraseña3", "3415522313", "Client" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_EventOrganizerId",

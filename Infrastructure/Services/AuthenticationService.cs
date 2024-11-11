@@ -47,7 +47,7 @@ namespace Infrastructure.Services
 
               if (user == null)
               {
-                  return ("User authentication failed"); //solucionar con exepciones custom
+                  return null; //solucionar con exepciones custom
               }
 
 

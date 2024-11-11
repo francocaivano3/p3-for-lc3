@@ -9,7 +9,11 @@ namespace Domain.Interfaces
 {
     public interface IEventOrganizerRepository
     {
+        EventOrganizer Add(EventOrganizer eventOrganizer);
         EventOrganizer GetEventOrganizer(int eventOrganizerId);
+        List<EventOrganizer> GetAll();
+        void Update(int id, EventOrganizer eventOrganizer);
+        void Delete(int eventOrganizerId);
         int CheckAvailableTickets(int eventOrganizerId, int eventId);
         int CheckSoldTickets(int eventOrganizerId, int eventId);
     }
